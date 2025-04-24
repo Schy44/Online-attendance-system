@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Register New Student</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 40px;
+      }
+      h1 {
+        text-align: center;
+      }
+      form {
+        max-width: 500px;
+        margin: auto;
+      }
+      label {
+        display: block;
+        margin-top: 10px;
+      }
+      input[type="text"],
+      input[type="email"],
+      input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+      }
+      button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #089700;
+        color: white;
+        border: none;
+        border-radius: 5px;
+      }
+      .messages {
+        max-width: 600px;
+        margin: 20px auto;
+      }
+      .messages li {
+        background: #e0ffe0;
+        border: 1px solid #00aa00;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Register New Student</h1>
+
+    <div class="messages">
+      {% with messages = get_flashed_messages() %} {% if messages %}
+      <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %} {% endwith %}
+    </div>
+
+    <form
+      method="POST"
+      action="{{ url_for('register_student') }}"
+      enctype="multipart/form-data"
+    >
+      <label for="name">Full Name</label>
+      <input type="text" name="name" required />
+
+      <label for="student_id">Student ID</label>
+      <input type="text" name="student_id" required />
+
+      <label for="email">Email</label>
+      <input type="email" name="email" required />
+
+      <label for="image_name">Image Name (without extension)</label>
+      <input type="text" name="image_name" required />
+
+      <label for="image_file">Upload Face Image (optional)</label>
+      <input type="file" name="image_file" />
+
+      <button type="submit">➕ Add Student</button>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SWE - Attendance System</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 40px;
+      }
+      h1 {
+        color: #333;
+        text-align: center;
+      }
+
+      iframe {
+        border: 2px solid #333;
+        width: 480px;
+        height: 320px;
+        display: block;
+        margin: 0 auto;
+      }
+
+      .controls {
+        margin-top: 30px;
+        text-align: center;
+      }
+
+      .controls a.button {
+        display: inline-block;
+        padding: 10px 20px;
+        background: linear-gradient(135deg, #0aba00, #067c00);
+        color: #fff;
+        text-decoration: none;
+        border-radius: 4px;
+        margin: 10px;
+      }
+
+      .controls a.button:hover {
+        background: linear-gradient(135deg, #0e9900, #045800);
+      }
+
+      .messages {
+        max-width: 600px;
+        margin: 20px auto;
+      }
+
+      .messages li {
+        background: #e0ffe0;
+        border: 1px solid #00aa00;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>SWE - Attendance System</h1>
+
+    <!-- Flash Messages -->
+    <div class="messages">
+      {% with messages = get_flashed_messages() %} {% if messages %}
+      <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %} {% endwith %}
+    </div>
+
+    <!-- Live Camera Feed -->
+    <h3 style="text-align: center">Live Camera View (ESP32-CAM)</h3>
+    <div style="display: flex; justify-content: center">
+      <iframe src="http://192.168.122.80:81/stream"></iframe>
+    </div>
+
+    <!-- Control Buttons -->
+    <div class="controls">
+      <a class="button" href="{{ url_for('fetch') }}">📸 Capture Face</a>
+      <a class="button" href="{{ url_for('attendance') }}"
+        >📝 Update Attendance</a
+      >
+      <a class="button" href="{{ url_for('absence') }}"
+        >📧 Send Absence Email</a
+      >
+      <a class="button" href="{{ url_for('calculate') }}"
+        >📊 Calculate Percentage</a
+      >
+      <a class="button" href="{{ url_for('register') }}"
+        >➕ Register New Student</a
+      >
+    </div>
+  </body>
+</html>
